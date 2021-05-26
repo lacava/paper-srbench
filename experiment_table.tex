@@ -1,0 +1,22 @@
+\begin{table}
+    \footnotesize
+    \center
+    \caption{
+        Settings used in the benchmark experiments. 
+        ``Total comparisons" refers to the total evaluatons of an algorithm on a dataset for a given noise level and random seed.
+    }\label{tbl:exp}
+    % \rowcolors{2}{gray!25}{white}
+    \begin{tabular}{lll}
+        Setting                     &   Black-box Problems              &   Ground-truth Problems                   \\
+        \midrule
+        No. of datasets             &   122                             &   130                                     \\
+        No. of algorithms           &   21 (14 SR, 7 ML)                &   14                                      \\
+        No. of trials per dataset   &   10                              &   10                                      \\
+        Train/test Split            &   .75/.25                         &   .75/.25                                 \\
+        Hyperparameter Tuning       &   5-fold Halving Grid Search CV   &   None (best set from BB problems)        \\
+        Termination criteria        &   500k evaluations/train or 48 hours    &   1M evaluations or 8 hours         \\ 
+        Levels of target noise      &   None                            &   0, 0.001, 0.01                          \\
+        Total comparisons           &   26840                           &   54600                                   \\ 
+        \bottomrule
+    \end{tabular}
+\end{table}

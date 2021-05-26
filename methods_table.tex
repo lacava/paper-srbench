@@ -1,0 +1,44 @@
+\begin{table}
+    \footnotesize
+    \center
+    \caption{
+        Short descriptions of the SR methods benchmarked in our experiment, including references and links to implementations. 
+        GP: genetic programming.
+    }\label{tbl:methods}
+    \rowcolors{2}{gray!25}{white}
+    \begin{tabular}{l L{12em} L{8em} r}
+        \rowcolor{white}
+        Method      &   Description                                         &   Method Family                       &   Implementation  \\ 
+        \midrule
+        AFP~\cite{schmidtAgefitnessParetoOptimization2011}               &   Age-fitness Pareto Optimization     &   GP
+                    &   C++/Python (\href{https://github.com/EpistasisLab/ellyn}{link})                  \\
+        AIFeynman~\cite{udrescuAIFeynmanParetooptimal2020}               &   Physics-inspired method             &   Divide and conquer
+                    &   Fortran/Python (\href{https://github.com/SJ001/AI-Feynman}{link})              \\
+        BSR~\cite{jinBayesianSymbolicRegression2020}                     &   Bayesian Symbolic Regression        &   Markov Chain Monte Carlo
+                    &   Python (\href{https://github.com/ying531/MCMC-SymReg}{link})                      \\
+        DSR~\cite{petersenDeepSymbolicRegression2020}                    &   Deep Symbolic Regression            &   Recurrent neural networks   
+                    &   Python (PyTorch) (\href{https://github.com/brendenpetersen/deep-symbolic-regression}{link})            \\
+        EPLEX~\cite{lacavaProbabilisticMultiobjectiveAnalysis2019}       &   $\epsilon$-lexicase selection       &   GP
+                    &   C++/Python (\href{https://github.com/EpistasisLab/ellyn}{link})                  \\
+        FEAT~\cite{lacavaLearningConciseRepresentations2019c}        &   Feature Engineering Automation Tool &   GP                          
+                    &   C++/Python (\href{https://github.com/lacava/feat}{link})                  \\
+        FE\_AFP~\cite{schmidtDistillingFreeformNatural2009b}               &   AFP with co-evolved fitness estimates; Eureqa-esque     &   GP
+                    &   C++/Python (\href{https://github.com/EpistasisLab/ellyn}{link})                  \\
+        FFX~\cite{mcconaghyFFXFastScalable2011}         &   Fast function extraction             &   Random search               
+                    &   C++/Python (\href{https://github.com/natekupp/ffx/tree/master/ffx}{link})                  \\
+        GPGOMEA~\cite{virgolin2020improving}     &   Gene-pool Optimal Mixing Evolutionary Algorithm     & GP            
+                    &   C++/Python (\href{https://github.com/marcovirgolin/GP-GOMEA/}{link})                  \\
+        gplearn     &   Koza-style symbolic regression in Python       &   GP                          
+                    &   C++/Python (\href{https://github.com/trevorstephens/gplearn}{link})                  \\
+        ITEA~\cite{defrancaInteractionTransformationEvolutionaryAlgorithm2020}   &   Interaction-Transformation EA       &   GP
+                    &   Haskell/Python (\href{https://github.com/folivetti/ITEA/}{link})              \\
+        MRGP~\cite{arnaldoMultipleRegressionGenetic2014a}                        &   Multiple Regression Genetic Programming &   GP
+                    &   Java (\href{https://github.com/flexgp/gp-learners}{link})                        \\
+        Operon~\cite{kommendaParameterIdentificationSymbolic2019}                &   SR with Non-linear least squares     &   GP
+                    &   C++/Python (\href{https://github.com/heal-research/operon}{link})                  \\
+        SemBackProp~\cite{virgolinLinearScalingSemantic2019}                     &   Semantic Back-propagation           &   GP
+                    &   C++/Python (\href{https://github.com/marcovirgolin/GP-GOMEA}{link})                  \\ 
+        \bottomrule
+    \end{tabular}
+\end{table}
+
