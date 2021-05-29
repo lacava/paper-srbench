@@ -1,0 +1,20 @@
+% In this paper we propose a common benchmarking framework for symbolic regression, the goal of which is to unite the disparate research communities studying symbolic regression under a common set of criteria. 
+Historically, the lion's share of methods for symbolic regression have relied on randomized search heuristics, especially genetic algorithms.
+% Historically, symbolic regression has been tackled using randomized search heuristics, especially genetic algorithms. 
+Recently, several fundamentally different approaches have been proposed, rooted in fields such as Bayesian optimization, physics, and deep learning, to name a few. 
+Despite the many promising approaches to symbolic regression, progress in the field continues to suffer from a lack of consensus regarding robust benchmarking tasks, appropriate evaluation criteria, appropriate controls, and other shortcomings regarding experimental design. 
+% Whereas these new approaches show promise, many of the experiments in recent work repeat common shortcomings of other symbolic regression literature, including a lack of common benchmark problems, settings, frameworks, evaluation criteria.  
+In this paper, we attempt to address many of these shortcomings by proposing an open-source, reproducible benchmarking platform for symbolic regression.
+% This paper describes our efforts to improve symbolic regression benchmarking standards through the design and evaluation of a common benchmarking platform called SRBench. 
+% in this paper we propose SRBench, a benchmarking framework for symbolic regression.  
+% to unite the disparate research communities studying symbolic regression under an 
+Using this platform, we assess \hl{15} symbolic regression methods, alongside \hl{7} machine learning methods, on a set of \hl{260} different regression problems. % of varying sizes (hundreds to millions of samples). 
+Our assessment includes both real-world datasets with no known model form as well as synthetic benchmark problems, including physics equations and systems of ordinary differential equations. 
+For the real-world datasets, we benchmark the ability of each method to learn models with low error and low complexity relative to state-of-the-art machine learning methods. 
+For the synthetic problems, we assess each method's ability to find exact solutions in the presence of varying levels of noise. 
+Under these controlled experiments, we conclude that the best performing methods for real-world regression combine genetic algorithms with parameter estimation and/or semantic search drivers. 
+When tasked with recovering exact equations in the presence of noise, we find that deep learning and genetic algorithm-based approaches perform similarly. 
+%that recent symbolic regression methods 
+% Contrary to findings from recent literature, we observe that the best performing methods for symbolic regression continue to be based in genetic algorithms, albeit with contemporary improvements. 
+% The best performing methods combine genetic algorithms with recent advances in the field, including semantic backpropagation and non-linear least squares for parameter estimation.
+We provide a detailed guide to reproducing this experiment and submitting new methods under continuous integration to encourage researchers to benchmark their methods using the same resource.

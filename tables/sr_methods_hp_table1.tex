@@ -1,0 +1,50 @@
+\begin{tabular}{l p{37em}}
+\toprule
+   Method &                                                                                                      Hyperparameters \\
+\midrule
+\midrule
+      AFP &               \{'popsize': 100, 'g': 2500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          & \{'popsize': 100, 'g': 2500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt', 'sin', 'cos']\} \\
+          &                \{'popsize': 500, 'g': 500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          &  \{'popsize': 500, 'g': 500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt', 'sin', 'cos']\} \\
+          &               \{'popsize': 1000, 'g': 250, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          & \{'popsize': 1000, 'g': 250, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt', 'sin', 'cos']\} \\
+\midrule
+AIFeynman &                                                                               \{'BF\_try\_time': 60, 'NN\_epochs': 4000\} \\
+          &                                                                               \{'BF\_try\_time': 60, 'NN\_epochs': 4000\} \\
+          &                                                                               \{'BF\_try\_time': 60, 'NN\_epochs': 4000\} \\
+          &                                                                               \{'BF\_try\_time': 600, 'NN\_epochs': 400\} \\
+          &                                                                               \{'BF\_try\_time': 600, 'NN\_epochs': 400\} \\
+          &                                                                               \{'BF\_try\_time': 600, 'NN\_epochs': 400\} \\
+\midrule
+      BSR &                                                                           \{'treeNum': 6, 'itrNum': 500, 'val': 1000\} \\
+          &                                                                           \{'treeNum': 6, 'itrNum': 1000, 'val': 500\} \\
+          &                                                                           \{'treeNum': 3, 'itrNum': 500, 'val': 1000\} \\
+          &                                                                           \{'treeNum': 6, 'itrNum': 5000, 'val': 100\} \\
+          &                                                                           \{'treeNum': 3, 'itrNum': 5000, 'val': 100\} \\
+          &                                                                           \{'treeNum': 3, 'itrNum': 1000, 'val': 500\} \\
+\midrule
+      DSR &                                                      \{'batch\_size': array([    10,    100,   1000,  10000, 100000])\} \\
+\midrule
+    EPLEX &               \{'popsize': 1000, 'g': 250, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          &                \{'popsize': 500, 'g': 500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          & \{'popsize': 1000, 'g': 250, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'sin', 'cos', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          &               \{'popsize': 100, 'g': 2500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          & \{'popsize': 100, 'g': 2500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'sin', 'cos', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          &  \{'popsize': 500, 'g': 500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'sin', 'cos', 'exp', 'log', '2', '3', 'sqrt']\} \\
+\midrule
+     FEAT &                                                                           \{'pop\_size': 100, 'gens': 2500, 'lr': 0.1\} \\
+          &                                                                           \{'pop\_size': 100, 'gens': 2500, 'lr': 0.3\} \\
+          &                                                                            \{'pop\_size': 500, 'gens': 500, 'lr': 0.1\} \\
+          &                                                                            \{'pop\_size': 500, 'gens': 500, 'lr': 0.3\} \\
+          &                                                                           \{'pop\_size': 1000, 'gens': 250, 'lr': 0.1\} \\
+          &                                                                           \{'pop\_size': 1000, 'gens': 250, 'lr': 0.3\} \\
+\midrule
+   FE\_AFP & \{'popsize': 1000, 'g': 250, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'sin', 'cos', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          &                \{'popsize': 500, 'g': 500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          &               \{'popsize': 1000, 'g': 250, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          &               \{'popsize': 100, 'g': 2500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          & \{'popsize': 100, 'g': 2500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'sin', 'cos', 'exp', 'log', '2', '3', 'sqrt']\} \\
+          &  \{'popsize': 500, 'g': 500, 'op\_list': ['n', 'v', '+', '-', '*', '/', 'sin', 'cos', 'exp', 'log', '2', '3', 'sqrt']\} \\
+\bottomrule
+\end{tabular}
