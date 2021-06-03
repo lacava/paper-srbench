@@ -1,7 +1,7 @@
 \documentclass{article}
 
 % if you need to pass options to natbib, use, e.g.:
-\PassOptionsToPackage{numbers, compress}{natbib}
+\PassOptionsToPackage{numbers, sort&compress}{natbib}
 % before loading neurips_data_2021
 
 % ready for submission
@@ -46,6 +46,9 @@
 %\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \usepackage{tcolorbox}
 \tcbuselibrary{minted,breakable,xparse,skins}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
 
 \definecolor{bg}{gray}{0.95}
 
@@ -63,14 +66,14 @@
 % \AND instead of \And before the third author name.
 
 \author{%
-        William La~Cava\footnote{corresponding author} \\
+        William La~Cava\thanks{corresponding author} \\
         Institute for Biomedical Informatics\\
         % Department of Biostatistics, Epidemiology and Informatics\\
         University of Pennsylvania\\
         % Philadelphia, PA 19104, USA \\
         \texttt{lacava@upenn.edu} \\
         \And
-        Patryk Orzechowski \\
+        Patryk Orzechowski \thanks{Patryk Orzechowski is also affiliated with Department of Automatics and Robotics, AGH University of Science and Technology, Krakow, Poland}\\
         Institute for Biomedical Informatics\\
         % Department of Biostatistics, Epidemiology and Informatics\\
         University of Pennsylvania\\
@@ -78,18 +81,17 @@
         \texttt{orzechowskip@upenn.edu} \\
         \And
         Bogdan Burlacu \\
-        Heuristic and Evolutionary Algorithms Laboratory \\
-        University of Applied Sciences \\ 
-        Upper Austria Softwarepark 11, 4232 \\
-        Hagenberg, Austria \\
-        \texttt{Bogdan.Burlacu@fh-hagenberg.at} \\
+        Josef Ressel Center for Symbolic Regression \\ 
+        University of Applied Sciences Upper Austria\\
+        %Softwarepark 11, 4232, Hagenberg, Austria \\
+        \texttt{bogdan.burlacu@fh-ooe.at} \\
         \And
         % Fabr\'{i}cio Olivetti de Fran\c a \\
         % F.O. de Fran\c a \\
-        F.O. de Franca \\
-        Center for Mathematics, Computation and Cognition, \\
-        Heuristics, Analysis and Learning Laboratory \\
-        Federal University of ABC \\
+        Fabr\'{i}cio Olivetti de Fran\c{c}a \\
+        %Center for Mathematics, Computation and Cognition, \\
+        %Heuristics, Analysis and Learning Laboratory \\
+        Federal University of ABC\thanks{Center for Mathematics, Computation and Cognition | Heuristics, Analysis and Learning Laboratory} \\
         Santo Andre, Brazil \\
         \texttt{folivetti@ufabc.edu.br} \\
         \And
@@ -106,10 +108,8 @@
         \texttt{ying531@stanford.edu} \\
         \And
         Michael Kommenda  \\
-        Heuristic and Evolutionary Algorithms Laboratory \\
-        University of Applied Sciences \\ 
-        % Upper Austria Softwarepark 11, 4232 \\
-        % Hagenberg, Austria \\
+        Josef Ressel Center for Symbolic Regression \\ 
+        University of Applied Sciences Upper Austria\\
         \texttt{ michael.kommenda@fh-ooe.at }
         \And
         Jason H. Moore \\ 
@@ -405,7 +405,8 @@
 % line. Please give LaTeX hyphenation hints using the \verb+\-+ command when
 % necessary.
 
-\begin{ack}
+% \begin{ack}
+\section*{Acknowledgments}
 % Use unnumbered first level headings for the acknowledgments. All acknowledgments
 % go at the end of the paper before the list of references. Moreover, you are required to declare
 % funding (financial activities supporting the submitted work) and competing interests (related financial activities outside the submitted work).
@@ -413,10 +414,9 @@
 
 % Do {\bf not} include this section in the anonymized submission, only in the final paper. You can use the \texttt{ack} environment provided in the style file to autmoatically hide this section in the anonymized submission.
     William La~Cava was supported by NIH/NLM grant K99LM012926 and would like to thank Curt Calafut and the Penn Medicine Academic Computing Services (PMACS) for supporting the computational load, and members of the Epistasis Lab for their patience.   
-    Computational support was provided by the Penn 
     Ying Jin would like to thank Doctor Jian Guo for hosting an internship for the project and Professor Jian Kang for helpful and inspiring guidances in Bayesian statistics.
     Authors declare no competing interests. 
-\end{ack}
+% \end{ack}
 
 % \section*{References}
 
@@ -430,8 +430,9 @@
 {
 \small
 
-\bibliographystyle{plainnat}
-\bibliography{SymbolicRegression}
+% \bibliographystyle{plainnat}
+\bibliographystyle{unsrtnat}
+\bibliography{SymbolicRegression,additional}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

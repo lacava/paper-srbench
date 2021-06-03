@@ -32,7 +32,39 @@ Please refer to \url{https://github.com/EpistasisLab/srbench/} for the most up-t
 
 \subsection{Running the Benchmark}
 
-\subsection{Dataset Information}
+\subsection{Contributing a Method}
+A living version of the method contribution instructions are described in the \href{https://github.com/EpistasisLab/srbench/blob/master/CONTRIBUTING.md}{Contribution Guide}.
+To illustrate the simplicity of contributing a method, Figure~\ref{fig:ex_code} shows the script submitted for Bayesian Symbolic Regression~\cite{jinBayesianSymbolicRegression2020}. 
+In addition to the code snippet, authors may either add their code package to the conda/pip environment, or provide an install script.
+When a pull request is issued by a contributor, new methods and installs are automatically tested on a minimal version of the benchmark.  
+
+\begin{figure}
+	\input{contribution_example}
+    \caption{
+        An example code contribution, defining the estimator, its hyperparameters, and functions to return the complexity and symbolic model.
+    }\label{fig:ex_code} 
+\end{figure}
+
+\subsection{Additional Background and Motivation}
+
+Eureqa is a closed-source commercial software that was acquired by DataRobot in 2017\footnote{\url{https://www.datarobot.com/nutonian/}}. 
+Due to its proprietary nature and incorporation into the DataRobot platform, it is impossible to benchmark its performance while controlling for important experimental variables such as computational effort. 
+However, the algorithmic aspects of Eureqa are described in literature and summarized here. 
+First is its use of directed acyclic graphs for representing equations in lieu of trees, which resulted in more space-efficient encodings without a significant difference in performance~\cite{schmidtComparisonTreeGraph2007}. 
+The most significant improvement over traditional tournament-based selection is Eureqa's use of age-fitness Pareto optimization (AFP), a method in which random restarts are incorporated each generation as new offspring, and are protected from competing with older, more fit equations by including age as an objective to be minimized~\cite{schmidtAgefitnessParetoOptimization2011}. 
+Eureqa also includes the co-evolution of fitness predictors, in which fitness assignment is sped up by optimizing a second population of training sample indices that best distinguish between equations in the population~\cite{schmidtCoevolutionFitnessPredictors2008}.
+It is also possible that Eureqa no longer uses any of these reported algorithms for SR, due to its closed-source nature.
+In that light, it is not clear what fundamental insight is gained when comparing to the software itself, other than a head-to-head comparison, since methodological insights cannot be extracted.
+
+Moreover, Eureqa's multi-objective optimization strategy (age-fitness pareto optimization~\cite{schmidtAgefitnessParetoOptimization2011}) has been outperformed by a number of other optimization methods (e.g.,~\cite{lacavaEpsilonLexicaseSelectionRegression2016c,liskowskiDiscoverySearchObjectives2017}), some of which are included in our study.
+Many other lines of research have pointed in promising directions, including hybridizations of GP with local search for constant optimization~\cite{topchyFasterGeneticProgramming2001,kommendaParameterIdentificationSymbolic2019} or structural tuning~\cite{lacavaInferenceCompactNonlinear2016}; the increasing use of \textit{semantic methods} for guiding variation~\cite{moraglioGeometricSemanticGenetic2012a,virgolinLinearScalingSemantic2019} and selection~\cite{azadKrzysztofKrawiecBehavioral2017,lacavaProbabilisticMultiobjectiveAnalysis2019,arnaldoMultipleRegressionGenetic2014a}; and alternative representations of equations~\cite{defrancaInteractionTransformationEvolutionaryAlgorithm2020,mcconaghyFFXFastScalable2011}.
+The term \textit{semantic methods} refers to evolutionary strategies that leverage the full behavior (i.e. semantics) of the model, and potentially its subcomponents, to drive search, rather than relying on aggregate, scalar fitness values~\cite{vanneschiSurveySemanticMethods2014}.
+
+
+
+
+\subsection{Additional Dataset Information}
+
 All datasets, including metadata, are available from \href{https://epistasislab.github.io/pmlb/}{PMLB}. 
 Each dataset is stored using Git Large File Storage and PMLB is planned for long-term maintenance.
 PMLB is available under an MIT license, and is described in detail in~\citet{romanoPMLBV1Open2021}. 
@@ -43,7 +75,7 @@ PMLB is intended to be used as a framework for benchmarking ML and SR algorithms
 This paper does not contribute new datasets, but rather collates and standardizes datasets that were already publicly available.
 In that regard, we do not foresee it as creating additional ethical issues around their use. 
 However, it is worth noting that PMLB contains well-known, real-world datasets from UCI and OpenML for which ethical considerations are important, such as the \href{https://github.com/EpistasisLab/pmlb/blob/master/datasets/1089_USCrime/metadata.yaml}{USCrime} dataset. 
-Whereas we would view the risk of harm arising specifically from this dataset to be low (the data is from 1960), it is examplary of a task for which algorithmic decision making could exacerbate existing biases in the criminal justice system.  
+Whereas we would view the risk of harm arising specifically from this dataset to be low (the data is from 1960), it is exemplary of a task for which algorithmic decision making could exacerbate existing biases in the criminal justice system.  
 As such it is used as a benchmark in a number of papers in the ML fairness literature (e.g.~\cite{kearnsPreventingFairnessGerrymandering2018}). 
 
 
@@ -57,25 +89,16 @@ We also observed that Eqn. II.11.17 was missing from the database.
 Finally, we excluded three datasets from our analysis that contained $\arcsin$ and $\arccos$ functions, as these were not implemented in the majority of SR algorithms we tested.
 
 \paragraph{Strogatz datasets}
-The Strogatz datasets were sourced from the \href{https://github.com/lacava/ode-strogatz}{ODE-Strogatz repository}.
+The Strogatz datasets were sourced from the \href{https://github.com/lacava/ode-strogatz}{ODE-Strogatz repository}~\cite{lacavaInferenceCompactNonlinear2016}.
 Each dataset is one state of a 2-state system of first-order, ordinary differential equations (ODEs). 
 The goal of each problem is to predict rate of change of the state given the current two states on which it depends. 
-The problems are adapted from~\cite{strogatzNonlinearDynamicsChaos2014} and represent natural processes that exhibit chaos and non-linear dynamics.  
+Each represents natural processes that exhibit chaos and non-linear dynamics.
+The problems were originally adapted from~\cite{strogatzNonlinearDynamicsChaos2014} by~\citet{schmidtMachineScienceAutomated2011}.   
 In order to simulate their behavior, initial conditions were chosen within stable basins of attraction.
-Each system was simulated using Simulink, and the code is available in the repository.
+Each system was simulated using Simulink, and the simulation code is available in the repository above.
+The equations for each of these datasets are shown in Table~\ref{tbl:strogatz}.
 
-\subsection{Contributing a Method}
-A living version of the method contribution instructions are described in the \href{https://github.com/EpistasisLab/srbench/blob/master/CONTRIBUTING.md}{Contribution Guide}.
-To illustrate the simplicity of contributing a method, Figure~\ref{fig:ex_code} shows the script submitted for Bayesian Symbolic Regression~\cite{jinBayesianSymbolicRegression2020}. 
-In addition to the code snippet, authors may either add their code package to the conda/pip environment, or provide an install script.
-When a pull request is issued by a contributor, new methods and installs are automatically tested on a minimal version of the benchmark.  
-
-\begin{figure}
-	\input{contribution_example}
-    \caption{
-        An example code contribution, defining the estimator, its hyperparameters, and functions to return the complexity and symbolic model.
-    }\label{fig:ex_code} 
-\end{figure}
+\input{tables/strogatz_models.tex}
 
 \subsection{Additional Experiment Details}
 
@@ -92,6 +115,7 @@ When a pull request is issued by a contributor, new methods and installs are aut
     \caption{
         ML methods and the hyperparameter spaces used in tuning.
     }
+	\label{tbl:ml_methods}
     \rowcolors{2}{gray!25}{white}
     \input{tables/ml_methods_hp_table}
     
@@ -103,6 +127,7 @@ When a pull request is issued by a contributor, new methods and installs are aut
     \caption{
         Part 1: SR methods and the hyperparameter spaces used in tuning on the black-box regression problems.
     }
+	\label{tbl:sr_methods1}
     \input{tables/sr_methods_hp_table1}
 \end{table}
 
@@ -114,5 +139,144 @@ When a pull request is issued by a contributor, new methods and installs are aut
     \caption{
         Part 2: SR methods and the hyperparameter spaces used in tuning on the black-box regression problems.
     }
+	\label{tbl:sr_methods2}
     \input{tables/sr_methods_hp_table2}
 \end{table}
+
+\section{Additional Results}
+
+\subsection{Performance on Friedman Datasets}
+
+The black-box problems for regression in PMLB were originally sourced from \href{www.openml.org}{OpenML}. 
+A few authors have noted that several of these datasets are sourced from~\citet{friedmanGreedyFunctionApproximation2001}'s synthetic benchmarks. 
+Due to their number, they may have an out-sized effect on results reporting in PMLB. 
+As result, reported performances may be biased towards algorithms that perform well on the so-called ``Friedman" problems. 
+In Fig.~\ref{fig:friedman}, we separate out results on this set of problems relative to the rest of PMLB. 
+We do find that, relative to the rest of PMLB, the results on the Friedman datasets distinguish top-ranked methods more clearly; among the rest of the benchmark, performance between top-performing methods is more similar. 
+In general, although we do see methods rankings change somewhat when looking at specific data groupings, we do not observe large differences. 
+An exception is Kernel ridge regression, which performs poorly on the Friedman datasets but very well on the rest of PMLB.
+We recommend that future revisions to PMLB expand the dataset collection to minimize the affect of any one source of data, regardless of the number of datasets it contains.
+
+\begin{figure}
+%    \includegraphics[width=\textwidth]{figs/results_pmlb_r1/friedman_comparison_pairgrid-pointplot_r2_test_norm.pdf}
+\includegraphics[width=\textwidth]{figs/results_pmlb_r1/friedman_comparison_pairgrid-pointplot_r2_test.pdf}
+
+    \caption{
+        Comparison of normalized $R^2$ test scores on all black-box datasets, just the Friedman datatasets, and just the non-Friedman datasets.
+    }
+    \label{fig:friedman}
+\end{figure}
+
+
+\subsection{Statistical Tests}
+Figures~\ref{fig:heat_stats_bb}-\ref{fig:heat_stats_sr} give summary significance levels of pairwise tests of significance between estimators on the black-box and ground-truth problems. 
+All pair-wise statistical tests are Wilcoxon signed-rank tests. 
+A Bonferroni correction was applied, yielding the $\alpha$ levels given in each. 
+This methodology for assessing statistical significance is based on the recommendations of~\citet{demsarStatisticalComparisonsClassifiers2006a} for comparing multiple estimators over many datasets.
+These figures are intended to complement Figures~\ref{fig:pmlb_perf}-\ref{fig:symbolic_solns} in which effect sizes are shown. 
+
+\begin{figure}
+    \begin{minipage}{0.5\textwidth}
+        \includegraphics[width=\textwidth]{figs/Pairwise_comparison_of_R2_Test_on_black-box_problems.pdf}
+    \end{minipage}
+    % \hspace{0.02\textwidth}
+    \begin{minipage}{0.5\textwidth}
+
+        \includegraphics[width=\textwidth]{figs/Pairwise_comparison_of_Model_Size_on_black-box_problems.pdf}
+    \end{minipage}
+        \caption{ 
+            Pairwise statistical comparisons on the black-box regression problems. 
+            Wilcoxon signed-rank tests are used with a Bonferonni correction on $\alpha$ for multiple comparisons.
+            (Left) $R^2$ test scores, (Right) model size. 
+        }
+        \label{fig:heat_stats_bb}
+\end{figure}
+
+
+
+
+\begin{figure}
+    \begin{minipage}{0.5\textwidth}
+        \includegraphics[width=\textwidth]{figs/Pairwise_comparison_of_R2_Test_on_symbolic_problems_target_noise=0.0.pdf}
+    \end{minipage}
+    % \hspace{0.02\textwidth}
+    \begin{minipage}{0.5\textwidth}
+        \includegraphics[width=\textwidth]{figs/Pairwise_comparison_of_R2_Test_on_symbolic_problems_target_noise=0.001.pdf}
+    \end{minipage}
+    \caption{ 
+        Pairwise statistical comparisons of $R^2$ test scores on the ground-truth regression problems. 
+        We report Wilcoxon signed-rank tests with a Bonferonni correction on $\alpha$ for multiple comparisons.
+        (Left) target noise of 0, (Right) target noise of 0.001. 
+    }
+    \label{fig:heat_stats_r2_sr}
+\end{figure}
+
+\begin{figure}
+    \begin{minipage}{0.5\textwidth}
+        \includegraphics[width=\textwidth]{figs/Pairwise_comparison_of_Symbolic_Solution_Rate_on_symbolic_problems_target_noise=0.0.pdf}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \includegraphics[width=\textwidth]{figs/Pairwise_comparison_of_Symbolic_Solution_Rate_on_symbolic_problems_target_noise=0.001.pdf}
+    \end{minipage}
+    \caption{ 
+        Pairwise statistical comparisons of solution rates on the ground-truth regression problems. 
+        We report Wilcoxon signed-rank tests with a Bonferonni correction on $\alpha$ for multiple comparisons.
+        (Left) target noise of 0, (Right) target noise of 0.001. 
+    }
+    \label{fig:heat_stats_r2_sr}
+\end{figure}
+
+% \begin{table}
+%     \centering
+%     \tiny 
+%     \input{tables/all_black_box_r2_test.tex}
+% \end{table}
+% \resizebox{\textwidth}{!}{%
+% \input{tables/pvals_symbolic_r2_test.tex}
+% \input{tables/pvals_symbolic_simplified_complexity.tex}
+% \input{tables/pvals_bb_r2_test.tex}
+% \input{tables/pvals_bb_model_size.tex}
+
+% \input{tables/pvals_symbolic_solution_rate_(%).tex}
+% }
+% \end{table}
+
+
+%SOME deleted stuff
+
+%are represented as a list of terms and each term is a tuple containing the transformation function and a list of exponents for the polynomial equation ~\cite{defrancaGreedySearchTree2018,defrancaInteractionTransformationEvolutionaryAlgorithm2020}.
+%following Eq.~\ref{eq:interaction}.
+%The mutation operators can either add or remove a term, replace the exponent of a variable on a random term, create a new term through positive or negative interaction. 
+%The positive interaction is the product of two interaction functions, while negative interaction is the division between two interactions. 
+%performs an Ordinary Least Square to adjust the coefficients to the training set.
+
+
+
+%Semantic backpropagation (\textbf{SBP}) is a technique invented and popularized by~\cite{wieloch2013running,krawiec2013approximating,pawlak2014semantic} to compute, for a given target value and a tree node position, what output is needed at the given position to make the output of the tree match the target value. It works by iterative inversions of the ancestry of function nodes, from the root down to the chosen node position. 
+%Here, we consider the GP algorithm by~\citet{virgolinLinearScalingSemantic2019}, which is an extension of~\cite{wieloch2013running}. 
+%To variate programs, SBP is performed on a random node position using the label as target, and the subtree rooted at the sampled node position is replaced with a tree chosen from a pre-computed library. 
+%The chosen tree has output that best matches the one computed by SBP (i.e., using the Euclidean distance on output vectors defined over the training set), after applying the optimal affine transformation on its output.
+
+
+
+
+%Symbolic model encoding
+
+%Interaction-Transformation (IT)~\cite{defrancaGreedySearchTree2018,defrancaInteractionTransformationEvolutionaryAlgorithm2020} is another equation representation that constraints the search space to the functional forms following:
+%\begin{equation}
+%f(\mathbf{x}) = w_0 + \sum_{i}{w_i \cdot (t_i \circ p_i) (\mathbf{x})},
+%\label{eq:appfunction}
+%\end{equation}
+%\noindent where $w_i \in \mathbb{R}$ are adjustable coefficients, $t_i : \mathbb{R} \rightarrow \mathbb{R}$ is the transformation function
+%(e.g., $\sin, \tanh, \mathrm{sqrt}$), and $p_i: \mathbb{R}^{d} \rightarrow \mathbb{R}$ for $d$ input variables is the interaction function:
+%\begin{equation}
+%p(\mathbf{x}) = \prod_{j=1}^{d}{x_j^{k_j}},
+%\label{eq:interaction}
+%\end{equation}
+%\noindent with $k_j \in \mathbb{Z}$ called the \emph{strength} of the interaction
+
+
+%gene pool optimal mixin
+%The goal is to prevent the disruption potentially-salient patterns of components, i.e., \emph{building blocks} with a positive concerted action.
+%In~\cite{virgolin2017scalable,virgolin2020improving}, it was shown that GP-GOMEA’s linkage-based recombination works significantly better than random recombination, and is especially competitive when small, potentially interpretable solutions are sought. 
+%We use the same implementation of~\cite{virgolin2020improving}.

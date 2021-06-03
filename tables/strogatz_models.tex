@@ -1,0 +1,32 @@
+\begin{table}[htb]
+\scriptsize
+\centering
+\renewcommand{\arraystretch}{1.2}\addtolength{\tabcolsep}{.5pt}
+\caption{The Strogatz ODE problems. 
+         } \label{tbl:strogatz}
+% \rowcolors{3}{white}{lightgray}
+\begin{tabular}{ll} %L{0.12\textwidth} L{0.25\textwidth} L{0.25\textwidth} L{0.25\textwidth} } \toprule 
+ Name & Target \\ \toprule 
+Bacterial Respiration                   & $\dot{x} = 20 - x - \frac{x \cdot y}{1+0.5 \cdot x^2}$ \\	
+                                        & $ \dot{y} = 10 - \frac{x \cdot y}{1+0.5 \cdot x^2}$	\\ 
+\midrule
+Bar Magnets                             & $\dot{\theta} = 0.5 \cdot \sin (\theta - \phi) - \sin (\theta)$	\\
+                                        & $ \dot{\phi} = 0.5 \cdot \sin (\phi - \theta) - \sin (\phi)$ \\ 
+\midrule
+Glider                                  & $\dot{v} = - 0.05 \cdot  v^2 - sin (\theta)$	\\
+                                        & $ \dot{\theta} = v - \cos (\theta)/v$	\\ 
+\midrule
+Lotka-Volterra interspecies dynamics    & $\dot{x} = 3  \cdot x - 2  \cdot x \cdot y - x^2$	\\
+                                        & $ \dot{y} = 2 \cdot y - x \cdot y - y^2$	\\ 
+\midrule
+Predator Prey                           & $\dot{x} = x  \cdot \left( 4 - x - \frac{y}{1+x} \right)$	\\
+                                        & $\dot{y} = y \cdot \left( \frac{x}{1+x} - 0.075 \cdot y \right)$	\\ 
+\midrule
+Shear Flow                              & $\dot{\theta} = \cot (\phi) \cdot cos(\theta)$	\\
+                                        & $ \dot{\phi} = \left(\cos ^2 (\phi) + 0.1 \cdot  \sin^2 (\phi)\right) \cdot sin(\theta)$	\\ 
+\midrule
+van der Pol oscillator                  & $\dot{x} = 10 \cdot  \left(y - \frac{1}{3} \cdot (x^3-x) \right)$	\\
+                                        & $ \dot{y} = -\frac{1}{10} \cdot x$ \\
+\bottomrule
+\end{tabular}
+\end{table}

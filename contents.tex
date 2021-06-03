@@ -1,35 +1,41 @@
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INSTRUCTIONS
+% - please add any additional references to additional.bib, NOT SymbolicRegression.bib
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Symbolic regression is an approach to interpretable machine learning in which the parameters, as well as the structure, of a model are optimized, typically with the goal of producing a model of a process that is easy to interpret, by virtue of its simplicity. 
+%In regression analysis, symbolic regression stands out as an approach that searches for a mathematical expression describing the input-output relationship of the studied phenomena. It differs from most regression models since it does not part from a fixed structure, thus having the possibility of finding a simpler expression.
 
-Symbolic regression literature has, in general, fallen short of evaluating and/or identifying any method or family of methods that could conceivably be considered "state-of-the-art". 
-In large part, these shortcomings are due to longstanding issues with the datasets used to benchmark symbolic regression, which are often small, trival, or simply not standardized (i.e. comparable) across papers or experiments~\cite{mcdermottGeneticProgrammingNeeds2012b}. 
-Although community surveys~\cite{whiteBetterGPBenchmarks2012a,mcdermottGeneticProgrammingNeeds2012b} have led to suggestions for improving benchmarking standards, and even black-listed certain problems, contemporary literature continues to be published based on those datasets~\cite{petersenDeepSymbolicRegression2020}.
-Furthermore, there is a stunning lack of cross-pollination between the research communities interested in symbolic regression, which include evolutionary computation, physics, engineering, statistics, and more traditional machine learning disciplines. 
-Finally, lack of consensus on what SR methods constitute "state-of-the-art" is due in part to the ways in which methodological studies may be conducted - i.e., the relative merit of conducting incremental ablation studies versus large benchmark studies, such as this one. 
-Whatever the causes, the result is that promising directions for future research in symbolic regression, and the outcomes that are possible, are not well supported by empirical evidence. 
+Symbolic regression (SR) is an approach to machine learning (ML) in which both the parameters and structure of an analytical model are optimized. 
+SR can be useful when one wishes to describe a process via a mathematical expression, especially a simple expression; thus, it is often applied in the hopes of producing a model of a process that, by virtue of its simplicity, may be easy to interpret.
 
+SR literature has, in general, fallen short of evaluating and/or identifying any method or family of methods that could be considered ``state-of-the-art'' (SotA).
+In large part, these shortcomings are due to longstanding issues with the datasets used to benchmark symbolic regression, which are often small, trivial, or simply not standardized (i.e. comparable) across papers or experiments~\cite{mcdermottGeneticProgrammingNeeds2012b}.
 
-The aspects of performance assessment for symbolic regression differ from typical regression benchmarking in important ways. 
-For one, the competing objectives of accuracy and simplicity must be considered simultaneously.  
-Furthermore, simplicity is itself a proxy for \textit{interpretability} - in other words, simplicity is often a necessary but not sufficient condition for interpretation.  
-In this light, datasets with ground truth solutions are useful, in that they allow researchers to assess whether or not the symbolic model regressed by a given method is the exact solution. 
-Assessing whether the symbolic model returned by a model is an exact match is non-trivial, and requires symbolic solvers with simplification procedures.
+Although community surveys~\cite{whiteBetterGPBenchmarks2012a,mcdermottGeneticProgrammingNeeds2012b} have led to suggestions for improving benchmarking standards, and even black-listed certain problems, contemporary literature continues to be published that partly violates those standards~\cite{petersenDeepSymbolicRegression2020}.
+Furthermore, there is a lack of cross-pollination between the research communities interested in symbolic regression, which include evolutionary computation, physics, engineering, statistics, and more traditional machine learning disciplines. 
+Finally, lack of consensus on what SR methods constitute ``SotA'' is due in part to the ways in which methodological studies may be conducted - i.e., the relative merit of conducting incremental ablation studies versus large benchmark studies, such as this one. 
+Whatever the causes, the result is that promising directions for future research in symbolic regression are not well-informed by empirical evidence. 
+
+The aspects of performance assessment for symbolic regression differ from typical regression benchmarking due to the interest in obtaining concise, symbolic expressions. 
+In general, the trade-off between accuracy and simplicity must be considered when evaluating the merits of different models.  
+Furthermore, model \emph{simplicity}, typically measured as sparsity or model size, is but a proxy for model \emph{interpretability}; a simple model may still be un-interpretable, or simply wrong~\cite{liptonMythos2018,poursabziManipulating2021,virgolinModelLearning2021}. 
+With these concerns in mind, datasets with ground truth solutions are useful, in that they allow researchers to assess whether or not the symbolic model regressed by a given method corresponds to a known analytical solution. 
+Assessing whether the symbolic model returned by a model is an exact match is non-trivial, and requires symbolic solvers equipped with a combination of algebraic simplification and structural pruning techniques.
 In addition, relative fidelity of estimated model forms that are not exact matches are difficult to assess.
 
-Synthetic datasets with ground truth solutions are not sufficient for benchmarking symbolic regression algorithms. 
-Such datasets do not give an adquate view into the expected performance of the algorithm when applied to datasets whose forms are yet to be discovered. 
-Because of this, we consider it essential to also evaluate the performance of SR on real-world or otherwise black-box regression problems, relative to state-of-the-art ML methods. 
+As synthetic datasets with ground truth solutions are not sufficient for benchmarking symbolic regression algorithms, we consider it essential to also evaluate the performance of SR on real-world or otherwise black-box regression problems, relative to SotA ML methods. 
 
-In this paper, we describe a large benchmarking effort that includes a dataset repository curated for symbolic regression, as well as a benchmarking repository designed to allow methodologists to easily contribute methods. 
-We incorporated 130 new datasets with ground truth forms into the Penn Machine Learning Benchmark (PMLB)~\cite{olsonPMLBLargeBenchmark2017d}, including metadata describing the underlying equations, their units, and various summary statistics. 
+
+%Such datasets do not give an adequate view into the expected performance of the algorithm when applied to datasets whose forms are yet to be discovered. 
+
+In this paper, we describe a large benchmarking effort that includes a dataset repository curated for symbolic regression, as well as a benchmarking library designed to allow methodologists to easily contribute methods. 
+To achieve this, we incorporated 130 datasets with ground truth forms into the Penn Machine Learning Benchmark (PMLB)~\cite{olsonPMLBLargeBenchmark2017d}, including metadata describing the underlying equations, their units, and various summary statistics. 
 Furthermore, we created a symbolic regression benchmark repository called SRBench\footnote{\url{https://github.com/EpistasisLab/srbench}} and sought contributions from researchers in this area. 
 Here we describe this process and the results, which consist of comparisons of \hl{15} contemporary SR methods on hundreds of regression problems. 
 
-To our knowledge this is by far the largest and most comprehensive SR benchmark effort to date, which allows us to make claims concering current state-of-the-art methods for SR with better certainty. 
+To our knowledge this is by far the largest and most comprehensive SR benchmark effort to date, which allows us to make claims concerning current SotA methods for SR with better certainty. 
 Importantly, and in contrast to many previous efforts, the datasets, methods, benchmarking code, and results are completely open-source, reproducible, and revision-controlled, which should allow SRBench to exist as a living benchmark for future studies.
 
 % New methods research risks falling into the trap of poor benchmarking strategies that have plagued previous symbolic regression efforts. 
@@ -38,48 +44,56 @@ Importantly, and in contrast to many previous efforts, the datasets, methods, be
 \section{Background and Motivation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\citet{kozaGeneticProgrammingProgramming1992a} introduced SR as an application of \textit{genetic programming} (GP), a field that investigates the use of genetic algorithms (GAs) to evolve executable data structures, i.e. programs. 
-In the case of so-called ``Koza-style" GP, the programs to be optimized are syntax trees consisting of functions/operations over input features and constants. 
-The earliest versions of GP used roulette-wheel selection to choose parents, and subtree mutation and subtree crossover to produce new variants (i.e. offspring) for the subsequent generation. 
-Most SR research to date has emerged from within this subfield and its associated conferences (Genetic and Evolutionary Computation Conference (GECCO), )
+Much like in regression, with SR we are interested in learning a mapping $\hat{\phi}(\mathbf{x}, \hat{\theta}): \mathcal{R}^d \rightarrow \mathcal{R}$ on the basis of a dataset  $\mathcal{D} = \{(\mathbf{x}_i, y_i), i = 1\;\dots\;N\}$, with $d$ features and $N$ samples. 
+SR assumes the existence of an analytical model of the form $y = \phi^*(\mathbf{x},\theta^*) + \epsilon$ that would generate $\mathcal{D}$, and thus casts the optimization problem as 
 
-Several recent works have proposed entirely different methods for tackling the SR problem. 
-These include SR methods based in Bayesian optimization~\cite{jinBayesianSymbolicRegression2020}, recurrent neural networks (RNNs)~\cite{petersenDeepSymbolicRegression2020}, and physics-inspired divide-and-conquer strategies~\cite{udrescuAIFeynmanPhysicsInspired2020,udrescuAIFeynmanParetooptimal2020}. 
+\begin{equation}
+    \phi^*(\mathbf{x},\theta^*) = \arg \min_{\phi,\theta} \mathcal{L}_{\mathcal{D}}\left(y(\mathbf{x}), \phi(\mathbf{x}, \theta) \right)
+\end{equation}
+
+For some loss function $\mathcal{L}$. 
+In contrast to regression, the goal of SR is learn both the true functional form of the mapping, $\phi^*$, as well as its parameters, $\theta^*$. 
+
+\citet{kozaGeneticProgrammingProgramming1992a} introduced SR as an application of \textit{genetic programming} (GP), a field that investigates the use of genetic algorithms (GAs) to evolve executable data structures, i.e. programs. 
+In the case of so-called ``Koza-style'' GP, the programs to be optimized are syntax trees consisting of functions/operations over input features and constants. 
+Like in other GAs, GP is a process that evolves a population of candidate solutions (e.g., syntax trees) by iteratively producing offspring from parent solutions (e.g., by swapping parent's subtrees) and eliminating unfit solutions (e.g., programs with subpar behavior).
+Most SR research to date has emerged from within this sub-field and its associated conferences.
+
+
+Recently, potentially due to the growing interest in interpretable ML~\cite{rudinStopExplaining2019}, entirely different methods for tackling SR have been proposed.
+These include methods based in Bayesian optimization~\cite{jinBayesianSymbolicRegression2020}, recurrent neural networks (RNNs)~\cite{petersenDeepSymbolicRegression2020}, and physics-inspired divide-and-conquer strategies~\cite{udrescuAIFeynmanPhysicsInspired2020,udrescuAIFeynmanParetooptimal2020}. 
+One of the most popularized and commercially successful GP-based SR methods is  Eureqa~\cite{schmidtDistillingFreeformNatural2009}, primary used to re-discover known physics equations. This proprietary software acquired by DataRobot in 2017~\footnote{\url{https://www.datarobot.com/nutonian/}}, often referred as the ``gold standard'' for SR~\cite{petersenDeepSymbolicRegression2020} and/or the best method for SR ``by far''~\cite{udrescuAIFeynmanPhysicsInspired2020} has been repetitively shown to be outperformed by the aforementioned works in terms of their ability to discover exact symbolic solutions to synthetic benchmark problems. 
+However, \citet{schmidtDistillingFreeformNatural2009b} makes no claim to being the state-of-the-art method for SR, nor is this hypothesis tested in their study; in fact it is not the focus of any of the body of work on which it is based~\cite{schmidtMachineScienceAutomated2011}. 
 
 %% Eureqa, what it is and isn't
-Some of these recent of these papers refer to Eureqa~\cite{schmidtDistillingFreeformNatural2009b}, a GP-based SR method used to re-discover known physics equations, as the "gold standard" for SR~\cite{petersenDeepSymbolicRegression2020} and/or the best method for SR "by far"~\cite{udrescuAIFeynmanPhysicsInspired2020}. 
-On the basis of this claim, the aformentioned works present methods that out-perform Eureqa in terms of their ability to discover exact symbolic solutions to synthetic benchmark problems. 
-However, \citet{schmidtDistillingFreeformNatural2009b} makes no claim to being the state-of-the-art method for SR, nor is this hypothesis tested in their study; in fact it is not the focus of any of the body of work on which it is based~\cite{schmidtMachineScienceAutomated2011}.  
-Instead, Eureqa's development is rooted in a number of ablation studies, i.e. studies in which incremental algorithmic changes are presented and tested in controlled comparisons. 
+%Some of these recent of these papers refer to Eureqa, a commercial, GP-based SR method used to re-discover known physics equations~\cite{schmidtDistillingFreeformNatural2009}, as the ``gold standard'' for SR~\cite{petersenDeepSymbolicRegression2020} and/or the best method for SR ``by far''~\cite{udrescuAIFeynmanPhysicsInspired2020}. 
+% On the basis of this claim, the aforementioned works present methods that out-perform Eureqa in terms of their ability to discover exact symbolic solutions to synthetic benchmark problems. 
+%However, \citet{schmidtDistillingFreeformNatural2009b} make no claim to being the SotA method for SR, nor is this hypothesis tested in the body of work on which Eureqa is based~\cite{schmidtMachineScienceAutomated2011}.  
 
-The ``state-of-the-art" claim notwithstanding, Eureqa is certainly the most well-known and perhaps most commercially successful method for SR. 
-Eureqa is a closed-source commercial software that was acquired by DataRobot in 2017\footnote{\url{https://www.datarobot.com/nutonian/}}. 
-Due to its proprietary nature and incorporation into the DataRobot platform, it is impossible to benchmark its performance while controlling for important experimental variables such as computational effort. 
-However, the algorithmic aspects of Eureqa are described in literature and summarized here. 
-First is its use of directed acyclic graphs for representing equations in lieu of trees, which resulted in more space-efficient encodings without a significant difference in performance~\cite{schmidtComparisonTreeGraph2007}. 
-The most significant improvement over traditional tournament-based selection is Eureqa's use of age-fitness Pareto optimization (AFP), a method in which random restarts are incorporated each generation as new offspring, and are protected from competing with older, more fit equations by including age as an objective to be minimized~\cite{schmidtAgefitnessParetoOptimization2011}. 
-Eureqa also includes the co-evolution of fitness predictors, in which fitness assignment is sped up by optimizing a second population of training sample indices that best distinguish between equations in the population~\cite{schmidtCoevolutionFitnessPredictors2008}.
-It is also possible that Eureqa no longer uses any of these reported algorithms for SR, due to its closed-source nature.
-In that light, it is not clear what fundamental insight is gained when comparing to the software itself, other than a head-to-head comparison, since methodological insights cannot be extracted.
+
+%Instead, Eureqa's development is rooted in a number of ablation studies~\cite{schmidtComparisonTreeGraph2007,schmidtCoevolutionFitnessPredictors2008,schmidtAgefitnessParetoOptimization2011}. 
+
+Although commercial platforms like Eureqa and Wolfram are well-known and commercially successful methods for SR, benchmarking results using them have serious caveats. 
+Important parameters of the experiment (e.g., computational effort, number of evaluations, automated solution checking) cannot be controlled across methods, nor can researchers determine which features of the software and/or experiment lead to observed differences in performance.  
+In that light, it is not clear what fundamental insight is gained when comparing to these closed-source software implementations beyond a simple head-to-head comparison.
+Rather than benchmark against Eureqa, we include a methodologically similar algorithm in our experiment which is described in the Methods section. Additional comment on Eureqa is provided in the Supplementary Material.
 
 % New methods for symbolic regression
-A close reading of SR literature since 2009 implies that a number of proposed methods would outperform Eureqa in controlled tests.
-For one, AFP optimization has been outperformed by a number of semantic-aware selection methods (e.g.,~\cite{lacavaEpsilonLexicaseSelectionRegression2016c,liskowskiDiscoverySearchObjectives2017}), some of which are included in our study, alongside AFP.
-Many other lines of research have pointed in promising directions, including hybridizations of GP with local search for constant optimization~\cite{topchyFasterGeneticProgramming2001,kommendaParameterIdentificationSymbolic2019} or structural tuning~\cite{lacavaInferenceCompactNonlinear2016}; the increasing use of semantic methods for guiding variation~\cite{moraglioGeometricSemanticGenetic2012a,virgolinLinearScalingSemantic2019} and selection~\cite{azadKrzysztofKrawiecBehavioral2017,lacavaProbabilisticMultiobjectiveAnalysis2019,arnaldoMultipleRegressionGenetic2014a}; and alternative representations of equations~\cite{defrancaInteractionTransformationEvolutionaryAlgorithm2020,mcconaghyFFXFastScalable2011}.
+%A close reading of SR literature since 2009 implies that a number of proposed methods would outperform Eureqa in controlled tests, and are therefore suitable choices for benchmarking.
 
 % lack of standards in symbolic regression field
-The widespread adoption of these promising SR approaches is ham-strung by a lack of consensus on good benchmark problems, testing frameworks, and experimental designs. 
-Our effort to establish a common benchmark is motivated by our view that the lack of strong, standardized benchmarks in the SR community impedes the adoption of promising techniques and impedes progress.  
+Unfortunately, the widespread adoption of these promising SR approaches is ham-strung by a lack of consensus on good benchmark problems, testing frameworks, and experimental designs. 
+Our effort to establish a common benchmark is motivated by our view that the lack of strong, standardized benchmarks in the SR community slows down the progress of this field because there is no clear baseline from which to assert the quality of new approaches.
 As a counterexample, consider the comparatively quick adoption of advances in the neural network community that create a ratcheting effect of progress towards better methods and architectures. 
-The quicker adoption of advancements for NNs is partially explained by the community's size, but we would contend that it is also due in part to community-wide focus on common benchmarks, frameworks (e.g. TensorFlow, PyTorch) and experiment designs. 
-In comparison, in SR literature it is common to publish results on a small number of small, easy, and unrealistic problems, comparing only to very basic GP systems such as those described in~\cite{kozaGeneticProgrammingProgramming1992a} nearly thirty years ago.   
-The issues around benchmarking have been described in detail~\cite{mcdermottGeneticProgrammingNeeds2012b}, and even led to community surveys and a proposal to ``black-list" several toy problems often reported in literature, such as the quartic polynomial problem~\cite{whiteBetterGPBenchmarks2012a}.
+The quicker adoption of advancements for NNs is partially explained by the community's size, but we would contend that it is also due in part to community-wide focus on common benchmarks (e.g. ImageNet~\cite{dengImagenetLargescaleHierarchical2009}), frameworks (e.g. TensorFlow, PyTorch) and experiment designs. 
+By contrast it is common to observe results in SR literature that are based on a small number of low dimensional, easy and unrealistic problems, comparing only to very basic GP systems such as those described in~\cite{kozaGeneticProgrammingProgramming1992a} nearly thirty years ago.   
+The issues around benchmarking have been described in detail~\cite{mcdermottGeneticProgrammingNeeds2012b}, and even led to community surveys and a proposal to ``black-list'' several toy problems often reported in literature, such as the quartic polynomial problem~\cite{whiteBetterGPBenchmarks2012a}.
 Despite these efforts to improve standards nearly ten years ago, toy datasets and comparisons to out-dated SR methods continue to appear in contemporary literature.
 
 % efforts to benchmark SR
 There have been recent efforts to improve benchmarking standards for SR.
 \citet{zegklitzBenchmarkingStateoftheartSymbolic2020} benchmarked four SR methods (specifically those using linear regression) on five datasets. 
-A larger benchmark (and precursor to this work) evaluated four recent SR methods on 94 regression problems in comparison to nine state-of-the-art ML approaches~\cite{orzechowskiWhereAreWe2018}. 
+A larger benchmark (and precursor to this work) evaluated four recent SR methods on 94 regression problems in comparison to nine SotA ML approaches~\cite{orzechowskiWhereAreWe2018}. 
 In both cases, SR methods were assessed solely on their ability to make accurate predictions. 
 In contrast, \citet{udrescuAIFeynmanPhysicsInspired2020} proposed 120 new synthetic, physics-based datasets for SR, but compared only to Eureqa and only in terms of exact solutions. 
 A major contribution of our work is its significantly more comprehensive scope than previous research.
@@ -104,13 +118,13 @@ In order to establish common datasets, we extended PMLB, a standardized set of r
 In order to standardize framework comparisons, we required contributors to define a minimal, Scikit-learn compatible~\cite{pedregosaScikitlearnMachineLearning2011a}, Python API for their method. 
 An example contribution is shown in Figure~\ref{fig:ex_code}.
 
-To ensure reproducibility, we defined a common environment (via conda) and with fixed versions of packages and their dependencies. 
-We defined a continuous integration testing framework that tested the installation of new methods within this environment, and runs a set of tests to ensure new methods are compatible with the benchmark code.  
-New contributions are submitted as pull requests and tested automatically.
+To ensure reproducibility, we defined a common environment (via Anaconda \footnote{https://www.anaconda.com/}) and with fixed versions of packages and their dependencies. 
+We created a continuous integration~\cite{fowlerContinuousIntegration} framework to ensure new contributions function properly and are compatible with the benchmark code.  
+% New contributions are submitted as requested updates, and tested automatically.
 
 We defined the experiment in two parts.
-The first is a comparison of SR methods on ``black-box" regression problems, for which the metrics of interest are test set accuracy, model complexity, and training time. 
-The second is a comparison of SR methods on ``ground-truth" regression problems, for which the metrics of interest are exact solution rates, test set accuracy, model complexity, and training time. 
+The first is a comparison of SR methods on ``black-box'' regression problems, for which the metrics of interest are test set accuracy, model complexity, and training time (each of these measures are defined below). 
+The second is a comparison of SR methods on ``ground-truth'' regression problems, for which the metrics of interest are exact solution rates, test set accuracy, model complexity, and training time. 
 
 
 \paragraph{Accuracy}
@@ -127,7 +141,8 @@ We assessed accuracy using the coefficient of determination ($R^2$), defined as
 \paragraph{Complexity}
 A number of different complexity measures have been proposed for SR, including those based in \textit{syntactic} complexity (i.e. related to the complexity of the symbolic model), \textit{semantic} complexity (i.e. related to the behavior of the model over the data)~\cite{vladislavlevaOrderNonlinearityComplexity2009a,udrescuAIFeynmanParetooptimal2020}, or both~\cite{kommendamichaelEvolvingSimpleSymbolic2015}. 
 The pros and cons of these methods and their relation to generalization and interpretability is discussed frequently in literature~\cite{murdochDefinitionsMethodsApplications2019}. 
-For the sake of simplicity, we opted to define complexity as the number of simple mathematical operators, nodes and constants in the model, where simple mathematical operators are in the set 
+Some recent works have explored taking a different route, namely learning estimators of the interpretability of SR models from labels provided by the users and features of the models such as the type of operations, the number of variables, etc.~\cite{virgolinLearningAFormula2020,virgolinModelLearning2021}.
+For the sake of simplicity, we opted to define complexity as the number of simple mathematical operators, features and constants in the model, where simple mathematical operators are in the set 
 $\{+,
     -,
     *,
@@ -142,29 +157,26 @@ $\{+,
 \max,
 \min \}$. 
 In addition to calculating the complexity of the raw model forms returned by each method, we calculated the complexity of the models after simplifying via \href{https://www.sympy.org/en/index.html}{sympy}.
+As mentioned earlier, this simplification procedure is approximate and not always successful; see the Appendix for further details. 
 
 %%
 % solutions
 %%%
 \paragraph{Solution Criteria}
-For the ground truth regression problems, we evaluated whether the final model was a ``solution" to the task according to two metrics: \textit{accuracy solution} and \textit{symbolic solution}. 
-A final model was considered an accuracy solution if it had a (near) perfect accuracy on the test set, defined as $R^2>0.999$. 
-A model was considered a symbolic solution if it was non-constant and satisifed at least one of the following conditions: 
+For the ground truth regression problems, we employed the following definition to determine whether the learned model had solved the problem.
 
-\begin{enumerate}
-    \item $\phi^*-\hat{\phi} = c $
-    \item $\frac{\phi^*}{\hat{\phi}} = c $ 
-\end{enumerate}
+\begin{definition}[Symbolic Solution]
+A model $\hat{\phi(\mathbf{x}, \hat{\theta})}$ is a Symbolic Solution to a dataset $\mathcal{D} = \{\mathbf{x}_i, y_i\}_{i-1}^N$, $y = \phi^*(\mathbf{x}, \theta^*) + \epsilon$, if either of the following conditions are true: 1) $\phi^*-\hat{\phi} = a $, for some constant $a$; or 2) $\phi^*/\hat{\phi} = b $ for some constant $b$.
+\end{definition}
 
-where $c$ is a constant. 
-This definition is designed to capture models within an affine transformation of the true model form (those that differ only by a constant or scalar). 
+This definition is designed to capture models that differ from the true model by a constant or scalar. 
 Prior to assessing symbolic solutions, each model underwent sympy simplification, as did the conditions above. 
-We chose to report both of these solution definitions because there are pros and cons to both. 
-Symbolic solutions are preferable to accuracy solutions in the sense that they are more a more faithful evaluation of the ability of an SR method to discover the data generating process.
+We chose to report both solution rates and test set $R^2$ for these problems because there are pros and cons to both. 
+Symbolic solutions are preferable to accuracy metrics in the sense that they are more a more faithful evaluation of the ability of an SR method to discover the data generating process.
 However, because any symbolic function can be represented in an infinite number of ways, and sympy's simplification procedure uses non-optimal heuristics, we cannot guarantee that all symbolic solutions are captured with perfect fidelity by this metric. 
-The accuracy solution metric more explicitly measures the model's ability to perfectly capture the underlying process, yet it has the disadvantage of being reported over finite samples. 
-Therefore accuracy solutions may not truly capture the data generating process. 
-In this sense, one may view the accuracy solution and symbolic solution metrics as optimistic and pessimistic estimates of performance, respectively.
+The accuracy metric more explicitly measures the model's ability to capture the underlying process, yet it has the disadvantage of being reported over finite samples. 
+Therefore accuracy may not truly capture the data generating process. 
+In this sense, one may view the accuracy and symbolic solution metrics as optimistic and pessimistic estimates of performance, respectively.
 
 \subsection{Symbolic Regression Methods}
 
@@ -176,64 +188,66 @@ Here we briefly describe what these methods are and describe how they fit into b
 
 % \subsubsection{Genetic Programming-Based Methods}
 % Most methods for SR come from the genetic programming (GP) literature. 
-The canonical implementation of GP-based SR starts with an initially random population programs/models, and then iterates through the steps of selection, variation and (optionally) survival~\cite{poliFieldGuideGenetic2008}.
-Selection chooses individuals from which to produce new points in the search space in the subsequent iteration. 
-The de-facto method of selection is tournament selection, in which a fixed-size sample of individuals are drawn and the fittest individual chosen as winner. 
-Selected models then under-go some combination of randomized mutation and/or crossover, traditionally at the subtree level or single node level.
+The canonical implementation of GP-based SR starts with an initially random population of programs/models, and then iterates through the steps of selection, variation and (optionally) survival~\cite{poliFieldGuideGenetic2008}.
+Selection chooses models from which to produce new points in the search space in the subsequent iteration. 
+The de-facto method of selection is tournament selection, in which a fixed-size sample of models is drawn and the fittest model chosen as winner. 
+Selected models then undergo some combination of randomized mutation and/or crossover, traditionally at the subtree level or single node level.
 In Koza-style GP, the resulting offspring replace the parents, but several common methods include a survival step in which the resulting offspring compete against the parents, at the very least to ensure the best model in the search space is not lost.
 This canonical method of GP-based SR is embodied by \textbf{gplearn}. 
 With these basic components in mind, we briefly describe the contemporary methods listed in Table~\ref{tbl:methods} based on the steps which they target - i.e. selection/survival, variation/recombination, fitness/evaluation, or program representations. 
 
 \paragraph{Pareto Optimization}
 
-An established approach to optimizing the accuracy and simplicity of candidate equations is to use multi-objective optimization methods such as NSGA-II\hl{cite} and SPEA-II\hl{cite}. 
+An established approach to optimizing the accuracy and simplicity of candidate equations at the same time is to use multi-objective optimization methods such as NSGA-II\hl{cite} and SPEA-II\hl{cite}. 
 
-\textbf{AFP}
+\hl{\textbf{AFP}}
 
-\textbf{FE\_AFP} is an implementation that closely mirrors key aspects of Eurequa as desribed in literature. 
+\textbf{AFP\_FE} is an implementation that closely mirrors key aspects of Eureqa as described in literature. 
 
 \paragraph{Semantic Search Drivers}
 
 Another promising line of research has been to leverage program \textit{semantics} (in this case, the equation's intermediate and final outputs over all training samples) more heavily during the stages of selection, variation and survival. 
-When a program's semantics are collapsed into single aggregate fitness values during optimization, an "information bottleneck" is created in which potentially valuable information about building blocks in the problem space, as well as the program space, is lost~\cite{azadKrzysztofKrawiecBehavioral2017}. 
+When a program's semantics are collapsed into single aggregate fitness values during optimization, an ``information bottleneck'' is created in which potentially valuable information about building blocks in the problem space, as well as the program space, is lost~\cite{azadKrzysztofKrawiecBehavioral2017}. 
 
 One selection that has emerged as an improvement over tournament selection and AFP is $\epsilon$-lexicase selection (\textbf{EPLEX})~\cite{lacavaEpsilonLexicaseSelectionRegression2016c}. 
-Rather than aggregating the training loss across samples, EPLEX utilizes the error vectors to conduct selection as if through a series of filters. 
+Rather than aggregating the training loss across samples, EPLEX utilizes the error vectors to conduct selection by filtering models through randomized subsets of cases, which rewards models that perform well on difficult regions of the training data. 
 We benchmark EPLEX as a stand-alone change, but it also appears as the parent selection method in FEAT~\cite{lacavaLearningConciseRepresentations2019c}. 
 
-Semantic backpropagation (\textbf{SBP}) is a technique invented and popularized by~\cite{wieloch2013running,krawiec2013approximating,pawlak2014semantic} to compute, for a given target value and a tree node position, what output is needed at the given position to make the output of the tree match the target value. 
-It works by iterative inversions of the ancestry of function nodes, from the root down to the chosen node position. 
-Here, we rely on the algorithm by~\citet{virgolinLinearScalingSemantic2019}, an SBP -based GP which is capable to tackle real-world regression datasets. 
-In this algorithm, similarly to~\cite{wieloch2013running}, recombination improves a solution by applying SBP on a random node position and using the label as target, and replacing the subtree rooted at the sampled position with a tree chosen from a pre-computed library. 
-The chosen tree has output that best matches the one computed by SBP (i.e., using the Euclidean distance on output vectors defined over the training set). 
-Moreover, optimal affine transformations are computed at the start of SBP and during library parsing, resulting in substantial performance gains~\cite{virgolinLinearScalingSemantic2019}.
+
+Semantic backpropagation (\textbf{SBP}) is a technique to compute, for a given target value and a tree node position, that value which makes the output of the model match the target value~\cite{wieloch2013running,krawiec2013approximating,pawlak2014semantic}. 
+It works by chaining inversions of tree nodes from the root to a chosen node position. 
+Here, we consider the GP algorithm by~\citet{virgolinLinearScalingSemantic2019} which proposes a mutation operator that substitutes desired semantics into programs from a pre-computed library of trees. 
+% Semantic backpropagation GP (\textbf{SBP}) determines the desirable output for a given tree node by backpropagating it to specific node using inversions of function found along the way ~\cite{wieloch2013running,krawiec2013approximating,pawlak2014semantic}. 
+% In this paper, an SBP implementation proposed by Virgolin et al. ~\cite{virgolinLinearScalingSemantic2019} is used, which is an extension of ~\cite{wieloch2013running}. This version uses a pre-computed library of trees for substitution as a variational operator.
+
 
 \paragraph{Constant optimization}
 
-Traditional GP encodes constants as building blocks that are initialized from a given distribution, and then optimizes them through the same process as the rest of the component building blocks.
+%Traditional GP encodes constants as building blocks that are initialized from a given distribution and optimized along other operators.
+%, and then optimizes them through the same process as the rest of the component building blocks.
 One of the clearest improvements over Koza-style GP has been the adoption of local search methods to handle constant optimization distinctly from evolutionary learning. 
-Backpropagation-based gradient descent has been proposed for GP-SR by~\citet{topchyFasterGeneticProgramming2001}, but for years was not widely adopted. 
-For example, the methods of~\citet{bongardNonlinearSystemIdentification2005a} and~\citet{schmidtDistillingFreeformNatural2009} that would appear years later opted for stochastic hill climbing for handling constant optimization. 
-More recent studies~\cite{kommenda_effects_2013,kommendaParameterIdentificationSymbolic2019} have made a strong case for the use of non-linear least squares approaches to constant optimization, and establish gradient-based constant optimization as an improvement over stochastic and evolutionary approaches.
-The aformentioned studies are embodied by \textbf{Operon}, a GP method that incorporates non-linear least squares constant optimization using the Levenberg-Marquadt algorithm\cite{burlacuOperonEfficientGenetic2020}.
+Backpropagation-based gradient descent has been proposed for GP-SR by~\citet{topchyFasterGeneticProgramming2001}, but for years was not widely adopted (see \citet{bongardNonlinearSystemIdentification2005a} and~\citet{schmidtDistillingFreeformNatural2009}).
+%For example, the methods of~\citet{bongardNonlinearSystemIdentification2005a} and~\citet{schmidtDistillingFreeformNatural2009} that would appear years later opted for stochastic hill climbing for handling constant optimization. 
+More recent studies~\cite{kommendaEffectsConstantOptimization06,kommendaParameterIdentificationSymbolic2019} have made a strong case for the use %of non-linear least squares approaches to constant optimization, and establish 
+of gradient-based constant optimization as an improvement over stochastic and evolutionary approaches.
+The aforementioned studies are embodied by \textbf{Operon}, a GP method that incorporates non-linear least squares constant optimization using the Levenberg-Marquadt algorithm\cite{burlacuOperonEfficientGenetic2020}.
 
-\paragraph{Equation Encodings}
+\paragraph{Symbolic Model Encodings}
 
-In addition to the question of how to best optimize constants, a line of research has proposed improved ways of defining constants within or between program encodings. 
-Rather than treating constants as building blocks, FEAT~\cite{lacavaLearningConciseRepresentations2019c} and \textbf{Operon}~\cite{burlacuOperonEfficientGenetic2020} encode weights at the edges of all nodes. 
+In addition to the question of how to best optimize constants, a line of research has proposed different ways of defining program and/or model encodings. 
+Rather than treating constants as building blocks, \textbf{FEAT}~\cite{lacavaLearningConciseRepresentations2019c} and \textbf{Operon}~\cite{burlacuOperonEfficientGenetic2020} encode weights as edges, and differ in their assignment of weights to all nodes (FEAT) versus just input variables (Operon). 
 \textbf{MRGP}~\cite{arnaldoMultipleRegressionGenetic2014a} splays individual program stack trace out as a matrix, using Lasso to identify building blocks and to train the final model.
-Methods such as \textbf{FFX}~\cite{mcconaghyFFXFastScalable2011}, EFS~\cite{arnaldoBuildingPredictiveModels2015}, and FEW~\cite{lacavaGeneralFeatureEngineering2017} treat the entire population as a single model for which individuals are features.
+Methods such as \textbf{FFX}~\cite{mcconaghyFFXFastScalable2011}, EFS~\cite{arnaldoBuildingPredictiveModels2015}, and FEW~\cite{lacavaGeneralFeatureEngineering2017} treat the entire population as a single model for which the population of models are features.
+Interaction-Transformation Evolutionary Algorithm (\textbf{ITEA}) is a mutation-only evolutionary algorithm that searches for the optimal IT-expression for a regression or classification problem.
+An IT-expression is defined as an affine combination of terms described as the composition of an unary function (transformation) and a polynomial function (interaction)~\cite{de_franca_greedy_2018,defrancaInteractionTransformationEvolutionaryAlgorithm2020}.
 
-\textbf{ITEA}
 
 \paragraph{Gene-pool Optimal Mixing Evolutionary Algorithm}
 
-The Genetic Programming version of the Gene-pool Optimal Mixing Evolutionary Algorithm (GP-GOMEA) is an EA with adaptive recombination based on a \emph{linkage model}~\cite{virgolin2017scalable,virgolin2020improving}. 
-A linkage model is a model of the level of interdependencies (i.e., linkage) existing within the encoding of evolving solutions~\cite{thierens2011optimal}. 
-Like other algorithms of the GOMEA family, GP-GOMEA computes a linkage model every generation, and uses this information to guide its recombination phase. 
-The goal is to prevent the disruption potentially-salient patterns of components, i.e., \emph{building blocks} with a positive concerted action.
-In~\cite{virgolin2017scalable,virgolin2020improving}, it was shown that GP-GOMEA’s linkage-based recombination works significantly better than random recombination, and is especially competitive when small, potentially interpretable solutions are sought. 
-We use the same implementation of~\cite{virgolin2020improving}.
+The Genetic Programming version of the Gene-pool Optimal Mixing Evolutionary Algorithm (GP-GOMEA) is a GP algorithm where recombination is adapted over time~\cite{virgolin2017scalable,virgolin2020improving}. Every generation, GP-GOMEA builds a statistical model of interdependencies within the encoding of the evolving programs, and then uses this information to recombine interdependent blocks of components, as to preserve their concerted action.
+%A linkage model is a model of the level of interdependencies (i.e., linkage) existing within the encoding of evolving solutions~\cite{thierens2011optimal}. 
+%Every generation, GP-GOMEA updates its linkage model and then uses it to drive the recombination process, mixing blocks of components that appear to be interdependent.
+GP-GOMEA was found to be especially competitive when relatively small programs are sought~\cite{virgolin2017scalable,virgolin2020improving}.
 
 \paragraph{Bayesian Symbolic Regression}
 
@@ -242,26 +256,32 @@ As in GP-based SR, arithmetic expressions are expressed with symbolic trees, alt
 Model parsimony is encouraged by specifying a prior that presumes additive, linear combinations of small components. 
 
 \paragraph{Deep Symbolic Regression}
-Deep Symbolic Regression (\textbf{DSR})~\cite{petersenDeepSymbolicRegression2020} uses a recurrent neural network architecture and reinforcement learning, including a novel a risk-seeking policy gradient. 
-DSR showed good performance in finding exact solutions to a number of synthetic benchmark problems, although 6 of the 12 problems for which they reported results in the main text (c.f. Table 1,~\cite{petersenDeepSymbolicRegression2020}) are low-order synthetic polynomials that were proposed for black-listing in community surveys (c.f. Table 3, \citet{whiteBetterGPBenchmarks2012a}).  
+Deep Symbolic Regression (\textbf{DSR})~\cite{petersenDeepSymbolicRegression2020} uses a recurrent neural network architecture and reinforcement learning, including a novel risk-seeking policy gradient. 
+DSR showed good performance in finding exact solutions to a number of synthetic benchmark problems, although 6 of the 12 problems reported by the authors  (c.f. Table 1,~\cite{petersenDeepSymbolicRegression2020}) are low-order synthetic polynomials that were proposed for black-listing in community surveys (c.f. Table 3, \citet{whiteBetterGPBenchmarks2012a}).  
 
 \paragraph{AI-Feynman}
-\hl{TODO}
+AI-Feynman is a complex modular approach which takes advantage of the commonality of similar equations in physics. 
+The method applies multiple techniques to symbolically solve the regression problem, including dimensionality reduction, polynomial fit or brute-force approach
+If solution can not be determined, a feed-forward neural network is applied to handle more complex problems~\cite{udrescuAIFeynmanPhysicsInspired2020}.
+An updated AI-Feynman 2.0 version uses Pareto-optimal solutions to balance between the accuracy and complexity of the solutions ~\cite{udrescuAIFeynmanParetooptimal2020}.
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Setup}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 We evaluated SR methods on two separate tasks. 
-First, we assessed their ability to make accurate predictions on "black-box" regression problems while minimizing the syntactic complexity of the solution. 
-Here "black-box" refers to not knowing the functional form of the underlying data-generating process, assuming one exists.   
-Second, we tested the ability of each method to find exact solutions to synthetic datasets with known, ground-truth functions. 
-The second set of problems are based on physics equations from several sources, as described below. 
+First, we assessed their ability to make accurate predictions on ``black-box'' regression problems (i.e. such, in which the underlying data generative function remains unknown) while minimizing the syntactic complexity of the solution. 
+%Here ``black-box'' refers to not knowing the functional form of the underlying data-generating process, assuming one exists.   
+Second, we tested the ability of each method to find exact solutions to synthetic datasets with known, ground-truth functions, originating from physics. 
+%The second set of problems are based on physics equations from several sources, as described below. 
 
 The basic experiment settings are summarized in Table~\ref{tbl:exp}.
 Each algorithm was trained on each dataset (and level of noise, for ground-truth problems) in 10 repeated trials with a different random state that controlled both the train/test split and the seed of the algorithm.  
 Datasets were split 75/25\% in training and testing. 
-For black-box regression problems, each algorithm was tuned using 5-fold CV with halving grid search. 
+For black-box regression problems, each algorithm was tuned using 5-fold cross validation with halving grid search. 
 The SR algorithms were limited to 6 hyperparameter combinations; the ML methods were allowed more, as shown in Appendix Tables~\ref{tbl:ml_methods}-\ref{tbl:sr_methods2}. 
 The best hyperparameter settings were used to tune a final estimator and evaluate it according to the metrics described above. 
 Details for running the experiment are given in the Appendix. 
@@ -271,7 +291,7 @@ Details for running the experiment are given in the Appendix.
 \subsection{Black-box Regression Problems}
 
 We used \hl{122} black-box regression problems available in PMLB v.1.0. 
-These problems are pulled from, and overlap with, varous open-source repositories, including OpenML~\cite{vanschorenOpenMLNetworkedScience2013} and the UCI repository~\cite{lichmanUCIMachineLearning2013a}. 
+These problems are pulled from, and overlap with, various open-source repositories, including OpenML~\cite{vanschorenOpenMLNetworkedScience2013} and the UCI repository~\cite{lichmanUCIMachineLearning2013a}. 
 PMLB standardizes these datasets to a common format and provides fetching functions to load them into Python (and R). 
 Each dataset includes metadata describing source information as well as a profile detailing the data distributions (e.g. \href{https://epistasislab.github.io/pmlb/profile/analcatdata_aids.html}{this dataset}).
 
@@ -282,37 +302,41 @@ The 130 datasets came from two sources: the \href{https://space.mit.edu/home/teg
 and the \href{https://github.com/lacava/ode-strogatz}{ODE-Strogatz repository}.
 
 Both sets of data come from first principles models of physical systems. 
-The Feynman problems originate in the \textit{Feynman Lectures on Physics}\cite{feynmanFeynmanLecturesPhysics2015}, and the datasets were recently created and proposed as SR benchmarks~\citet{udrescuAIFeynmanPhysicsInspired2020}. 
-
+The Feynman problems originate in the \textit{Feynman Lectures on Physics}~\cite{feynmanFeynmanLecturesPhysics2015}, and the datasets were recently created and proposed as SR benchmarks~\citet{udrescuAIFeynmanPhysicsInspired2020}. 
 Whereas the Feynman datasets represent static systems, the Strogatz problems are non-linear and chaotic dynamical processes~\cite{strogatzNonlinearDynamicsChaos2014}.
 Each dataset is one state of a 2-state system of first-order, ordinary differential equations (ODEs). 
-They were used to benchmark SR methods in previous work~\cite{lacavaInferenceCompactNonlinear2016,schmidtMachineScienceAutomated2011}.
+They were used to benchmark SR methods in previous work~\cite{lacavaInferenceCompactNonlinear2016,schmidtMachineScienceAutomated2011}, and are described in the Appendix Table~\ref{tbl:strogatz}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The median test set performance on all problems and methods for the black-box benchmark problems is summarized in Figure~\ref{fig:pmlb_perf}. 
-Among all methods, we observe the best test set performance using Operon. 
 
-The top three methods (Operon, SBP, FEAT) are all GP based SR methods. 
-Not only do they outperform other SR methods, they also perform on par or better than state-of-the-art ML methods like XGB and LGBM. 
-\hl{todo: stats}. 
+The median test set performance on all problems and methods for the black-box benchmark problems is summarized in Figure~\ref{fig:pmlb_perf}.  
+Across the problems, we find that the models generated by Operon are significantly more accurate than any other method's models in terms of test set $R^2$ ($p\leq$\hl{4.9e-07}). 
+SBP and FEAT rank second and third and attain similar accuracies, although the models produced by FEAT are significantly smaller ($p=$\hl{9.2e-22}).
 
-Across problems, DSR and BSR do not perform significantly different from penalized linear regression (Linear). 
-DSR also has the third longest running time. 
+We note that four of the top five methods (Operon, SBP, FEAT, EPLEX) and six of the top ten methods (GP-GOMEA, ITEA) are GP-based SR methods. 
+The other top methods are ensemble tree-based methods, including two popular gradient-boosting algorithms, XGBoost and LightGBM~\cite{chenXgboostScalableTree2016,keLightgbmHighlyEfficient2017}); Random Forest~\cite{breimanRandomForests2001b}; and AdaBoost~\cite{}.
+Among these methods, Operon, SBP, and FEAT significantly outperform XGBoost ($p<$\hl{}) and LightGBM ($p<\hl{}$), while EPLEX and GP-GOMEA similarly to them.  
+ITEA's overall accuracy is not significantly different than RandomForest or AdaBoost. 
+Except SBP, the models produced by the top SR methods are 1-3 orders of magnitude smaller than models produced by the ensemble tree-based approaches ($p<$\hl{1.3e-21}).
 
-AIFeynman performs poorly on these problems, suggesting that not many of them exhibit the qualities of physics systems (translatability, symmetry, etc) that AIFeynman was designed to exploit. 
-
-\hl{add stats table}
+Among the non-GP-based SR algorithms, FFX and DSR perform similarly to each other ($p=$0.76) and significantly better than BSR and AIFeynman ($p\leq$\hl{6.1e-05}).
+FFX trains more quickly than DSR, although DSR produces some of the smallest solutions, akin to penalized regression.
+We note that AIFeynman performs poorly on these problems, suggesting that not many of them exhibit the qualities of physics systems (translatability, symmetry, etc) that AIFeynman was designed to exploit. 
+Additional statistical comparisons are given in the Appendix.
 
 Performance on the ground-truth regression problems is summarized in Figure~\ref{fig:symbolic_solns}. 
 Methods are sorted by their solution rate for the middle level of noise (0.001). 
-We observe that, as in previous literature, AIFeynman performs well in terms of finding exact solutions for systems without noise. 
-However, we found AIFeynman to be quite sensitive to added noise. 
-In contrast, FE\_AFP, DSR perform similarly well (with a minor drop in success rate) as noise is added, suggesting they are would be less brittle in application to real-world data. 
+We observe that, as in previous literature, AIFeynman performs well in terms of finding exact solutions for systems without noise, significantly outperforming other methods. 
+However, we found AIFeynman to be very sensitive to added noise: its solution rate drops by 50 percentage points when noise is added. 
+In contrast, AFP\_FE and DSR perform similarly in the presence of noise (with a minor drop in success rate).
+These results reinforce the results on black-box regression in suggesting AIFeynman may be brittle in application to real-world data. 
 
-We note that the best method on real-world data, Operon, here struggles to recover symbolic solutions to these problems, despite also finding many candidate solutions with perfect or near prefect test set scores (center panel, Figure~\ref{fig:symbolic_solns}. 
-We see a similar pattern with MRGP, and also note that MRGP exhibits overfitting to the addition of noise, as noted by the larger final model sizes it produces. 
+We note that the best method on real-world data, Operon, here struggles to recover symbolic solutions to these problems, despite also finding many candidate solutions with perfect or near prefect test set scores (center panel, Figure~\ref{fig:symbolic_solns}). 
+We see a similar pattern with MRGP, and also note that MRGP exhibits over-fitting to the addition of noise, as noted by the larger final model sizes it produces. 
+
+Pairwise statistical tests for these comparisons are provided in the Appendix.
 
 % \subsection{Black-box Regression Problems}
 % overall pmlb results
@@ -349,8 +373,9 @@ We see a similar pattern with MRGP, and also note that MRGP exhibits overfitting
 
 % runtime, complexity 
 % pareto curves
-% Since we are concerned with accuracy as well as simplicity, we take "state-of-the-art" to mean methods that are on the Pareto front of accuracy and simplicity. 
-We estimate and visualize the Pareto front for black-box and ground-truth regression in Figure~\ref{fig:pareto}. 
+In Figure~\ref{fig:pareto}, we illustrate the performance of the methods on the black-box problems when accuracy and simplicity are considered simultaneously.
+In this case, we prefer methods near the Pareto front of these two objectives, highlighted by the solid line. 
+The Pareto front represents the set of solutions that are pure trade-offs between accuracy and simplicity, in the sense that one cannot identify another method that performs as well or better in one of the two objectives without accepting poorer performance in the other.  
 
 % \begin{wrapfigure}{r}{0.6\textwidth}
 \begin{figure}
@@ -363,8 +388,10 @@ We estimate and visualize the Pareto front for black-box and ground-truth regres
     %     \includegraphics[width=\textwidth]{figs/results_sym_data/pareto_plot_r2_test_rank_model_size_rank.pdf}
     % \end{minipage}
     \caption{
-        Pareto plots comparing the rankings of SR methods in terms of model size and $R^2$ score; (left) black-box problems, (right) ground-truth problems.
+        Pareto plot comparing the rankings of SR methods in terms of model size and $R^2$ score on the black-box problems.
         Points are the median ranking across datasets, and the bars represent 95\% confidence intervals. 
+        Connecting lines denote the Pareto sets of models. 
+        Pareo sets towards the bottom left are the most efficient trade-offs of model size and accuracy. 
     } \label{fig:pareto}
 \end{figure}
 % \end{wrapfigure}
@@ -372,19 +399,29 @@ We estimate and visualize the Pareto front for black-box and ground-truth regres
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion and Conclusions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-    \item directions for improvement in SR
-    \begin{itemize}
-        \item running time
-        \item tolerance to noise
-        \item post-run pruning
-    \end{itemize}
-    \item improvements to benchmarks
-    \begin{itemize}
-        \item feature noise
-        \item add observations of systems with known dynamics. Caveat: real systems and first principles don't always line up, as in metabolic systems~\cite{yeast} and fluid dynamics \cite{lacavaInferenceCompactNonlinear2016}. 
-        \item additional methods: cartesian gp, grammar VAE, etc...
-    \end{itemize}
-\end{itemize}
 
-\paragraph{Tolerance to noise}
+The main contribution of this paper is providing an objective comparison of SotA symbolic regression methods on a wide range of diverse regression problems.
+The methods are analyzed from multiple angles, including their accuracy, running time, but also tolerance of noise, and complexity of provided solutions. 
+
+The popularity of real-life regression problems and need to understand rationale between underlying nature makes our resource a valuable resource in search for interpretable solutions.
+%Due to its proprietary nature and incorporation into the DataRobot platform, it is impossible to benchmark Eureqa its performance while controlling for important experimental variables such as computational effort. 
+
+
+
+TODO: longer discussion, conclusions etc.
+
+%\begin{itemize}
+%    \item directions for improvement in SR
+%    \begin{itemize}
+%        \item running time
+%        \item tolerance to noise
+%        \item post-run pruning
+%    \end{itemize}
+%    \item improvements to benchmarks
+%    \begin{itemize}
+%        \item feature noise
+%        \item add observations of systems with known dynamics. Caveat: real systems and first principles don't always line up, as in metabolic systems~\cite{yeast} and fluid dynamics \cite{lacavaInferenceCompactNonlinear2016}. 
+%        \item additional methods: cartesian gp, grammar VAE, etc...
+%    \end{itemize}
+%\end{itemize}
+
